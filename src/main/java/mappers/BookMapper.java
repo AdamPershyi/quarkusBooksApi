@@ -11,6 +11,7 @@ import java.util.List;
 public interface BookMapper {
     @Mapping(source = "author_id", target = "author.id")
     Book toEntity(BookInputDto bookDto);
+
     @Mapping(source = "author.id", target = "author_id")
     BookDto toDto(Book book);
 

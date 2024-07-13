@@ -9,6 +9,7 @@ import jakarta.transaction.Transactional;
 import mappers.BookMapper;
 import repositories.BookRepository;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -54,5 +55,15 @@ public class BookService {
         Book bookById = findBookById(id);
         return bookMapper.toDto(bookById);
 
+    }
+
+    public List<BookDto> getBooksByTitle(List<BookInputDto> bookInputDtos) {
+        List<Book> booksMatch = new ArrayList<>();
+        for (BookInputDto bookInputDto : bookInputDtos) {
+            List<Book> byTitle = bookRepository.findByTitle(bookInputDto.title());
+            booksMatch.addAll(byTitle);
+
+        }
+        return bookMapper.toListDtos(booksMatch);
     }
 }

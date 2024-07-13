@@ -10,7 +10,6 @@ import mappers.AuthorMapper;
 import repositories.AuthorRepository;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.UUID;
 
@@ -67,7 +66,7 @@ public class AuthorService {
 
     public AuthorDto getAuthorById(UUID id) {
         Author authorById = findAuthorById(id);
-        return  authorMapper.toDto(authorById);
+        return authorMapper.toDto(authorById);
     }
 
     private Author findAuthorById(UUID id) {

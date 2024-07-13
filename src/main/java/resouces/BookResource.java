@@ -27,17 +27,22 @@ public class BookResource {
     public BookDto updateBook(BookInputDto bookInputDto, UUID bookId) {
         return bookService.updateBook(bookInputDto, bookId);
     }
-@Query("getBooks")
-public List<BookDto> getBooks(){
+
+    @Query("getBooks")
+    public List<BookDto> getBooks() {
         return bookService.getBooks();
 
-}
+    }
 
-@Query("getBook")
-    public BookDto getBook(UUID id){
+    @Query("getBook")
+    public BookDto getBook(UUID id) {
         return bookService.getBook(id);
-}
+    }
 
+    @Query("getBooksByTitle")
+    public List<BookDto> getBooksByTitle(List<BookInputDto> bookInputDtos) {
+        return bookService.getBooksByTitle(bookInputDtos);
+    }
 
 
 }

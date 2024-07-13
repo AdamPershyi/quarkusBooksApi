@@ -31,7 +31,11 @@ public class Book {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "author_id")
-    @ToString.Exclude
     private Author author;
+
+    //1 - Протестувати, зробити так, щоб всі квері відпрацьовували
+    //2 - Відформатувати
+    //3 - чекнути сонар
+    //4 - комміт та пуш
 
 }

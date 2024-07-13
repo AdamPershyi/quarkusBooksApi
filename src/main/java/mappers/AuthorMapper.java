@@ -3,7 +3,10 @@ package mappers;
 import dtos.AuthorDto;
 import dtos.AuthorInputDto;
 import entities.Author;
-import org.mapstruct.*;
+import org.mapstruct.Mapper;
+import org.mapstruct.MappingConstants;
+import org.mapstruct.MappingTarget;
+import org.mapstruct.ReportingPolicy;
 
 import java.util.List;
 

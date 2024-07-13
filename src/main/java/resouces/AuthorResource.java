@@ -17,13 +17,13 @@ public class AuthorResource {
     AuthorService authorService;
 
     @Mutation("createAuthor")
-    public AuthorDto createAuthor(AuthorInputDto authorInputDto){
+    public AuthorDto createAuthor(AuthorInputDto authorInputDto) {
         return authorService.createAuthor(authorInputDto);
     }
 
     @Mutation("updateAuthor")
-    public AuthorDto updateAuthor(AuthorInputDto authorInputDto, UUID authorId){
-return authorService.updateAuthor(authorInputDto,authorId);
+    public AuthorDto updateAuthor(AuthorInputDto authorInputDto, UUID authorId) {
+        return authorService.updateAuthor(authorInputDto, authorId);
     }
 
     @Query("getAuthors")
@@ -37,12 +37,9 @@ return authorService.updateAuthor(authorInputDto,authorId);
     }
 
     @Query("getAuthorByName")
-    public List<AuthorDto> getAuthorByName(List<AuthorInputDto> authorInputDtos){
+    public List<AuthorDto> getAuthorByName(List<AuthorInputDto> authorInputDtos) {
         return authorService.getAuthorByName(authorInputDtos);
     }
-
-
-
 
 
 }

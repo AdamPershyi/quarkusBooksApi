@@ -1,5 +1,4 @@
 package resouces;
-
 import dtos.AuthorDto;
 import dtos.AuthorInputDto;
 import jakarta.inject.Inject;
@@ -7,7 +6,6 @@ import org.eclipse.microprofile.graphql.GraphQLApi;
 import org.eclipse.microprofile.graphql.Mutation;
 import org.eclipse.microprofile.graphql.Query;
 import services.AuthorService;
-
 import java.util.List;
 import java.util.UUID;
 
@@ -21,9 +19,9 @@ public class AuthorResource {
         return authorService.createAuthor(authorInputDto);
     }
 
-    @Mutation("updateAuthor")
+    @Mutation("updatedAuthor")
     public AuthorDto updateAuthor(AuthorInputDto authorInputDto, UUID authorId) {
-        return authorService.updateAuthor(authorInputDto, authorId);
+        return authorService.updatedAuthor(authorInputDto, authorId);
     }
 
     @Query("getAuthors")

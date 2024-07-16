@@ -1,10 +1,7 @@
 package repositories;
-
 import entities.Book;
 import io.quarkus.hibernate.orm.panache.PanacheRepositoryBase;
-import io.quarkus.panache.common.Parameters;
 import jakarta.enterprise.context.ApplicationScoped;
-
 import java.util.List;
 import java.util.UUID;
 
@@ -17,6 +14,6 @@ public class BookRepository implements PanacheRepositoryBase<Book, UUID> {
     }
 
     public List<Book> findByTitle(String title) {
-        return find("SELECT a FROM Book a WHERE a.title = :title", Parameters.with("title", title)).list();
+        return find("SELECT a FROM Book a WHERE a.title = ?1",title).list();
     }
 }

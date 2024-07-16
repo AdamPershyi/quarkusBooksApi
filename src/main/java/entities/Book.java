@@ -1,10 +1,8 @@
 package entities;
-
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
 import lombok.*;
-
+import org.hibernate.annotations.UuidGenerator;
 import java.time.LocalDate;
 import java.util.UUID;
 
@@ -17,11 +15,10 @@ import java.util.UUID;
 @NoArgsConstructor
 public class Book {
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
+    @UuidGenerator
     @Column(name = "id", nullable = false)
     private UUID id;
 
-    @Size(max = 255)
     @NotNull
     @Column(name = "title", nullable = false)
     private String title;
@@ -32,10 +29,5 @@ public class Book {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "author_id")
     private Author author;
-
-    //1 - Протестувати, зробити так, щоб всі квері відпрацьовували
-    //2 - Відформатувати
-    //3 - чекнути сонар
-    //4 - комміт та пуш
 
 }

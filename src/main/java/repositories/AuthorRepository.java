@@ -1,10 +1,7 @@
 package repositories;
-
 import entities.Author;
 import io.quarkus.hibernate.orm.panache.PanacheRepositoryBase;
-import io.quarkus.panache.common.Parameters;
 import jakarta.enterprise.context.ApplicationScoped;
-
 import java.util.List;
 import java.util.UUID;
 
@@ -17,9 +14,7 @@ public class AuthorRepository implements PanacheRepositoryBase<Author, UUID> {
     }
 
     public List<Author> findByName(String name) {
-        return find("SELECT a FROM Author a WHERE a.name = :name", Parameters.with("name", name)).list();
-
-
+        return find("SELECT a FROM Author a WHERE a.name = ?1",name).list();
     }
 
 }

@@ -1,5 +1,4 @@
 package services;
-
 import dtos.AuthorDto;
 import dtos.AuthorInputDto;
 import entities.Author;
@@ -8,7 +7,6 @@ import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
 import mappers.AuthorMapper;
 import repositories.AuthorRepository;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -28,12 +26,11 @@ public class AuthorService {
     }
 
     @Transactional
-    public AuthorDto updateAuthor(AuthorInputDto authorInputDto, UUID authorId) {
+    public AuthorDto updatedAuthor(AuthorInputDto authorInputDto, UUID authorId) {
         Author author = authorById(authorId);
-        authorMapper.updateAuthor(author, authorInputDto);
-        Author updateAuthor = authorRepository.update(author);
-        return authorMapper.toDto(updateAuthor);
-
+        authorMapper.updatedAuthor(author, authorInputDto);
+        Author updatedAuthor = authorRepository.update(author);
+        return authorMapper.toDto(updatedAuthor);
     }
 
     public Author authorById(UUID authorId) {
@@ -44,7 +41,6 @@ public class AuthorService {
         List<AuthorInputDto> authorWithoutName = authorInputDto.stream()
                 .filter(authorInputDto1 -> authorInputDto1.name() == null)
                 .toList();
-
         if (!authorWithoutName.isEmpty()) {
             throw new RuntimeException("dai name");
         }
@@ -55,14 +51,12 @@ public class AuthorService {
             matchAuthor.addAll(byName);
         }
         return authorMapper.toListDtos(matchAuthor);
-
     }
 
     public List<AuthorDto> getAuthors() {
         List<Author> authors = authorRepository.listAll();
         return authorMapper.toListDtos(authors);
     }
-
 
     public AuthorDto getAuthorById(UUID id) {
         Author authorById = findAuthorById(id);

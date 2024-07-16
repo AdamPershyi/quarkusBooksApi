@@ -1,5 +1,4 @@
 package services;
-
 import dtos.BookDto;
 import dtos.BookInputDto;
 import entities.Book;
@@ -8,7 +7,6 @@ import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
 import mappers.BookMapper;
 import repositories.BookRepository;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -17,7 +15,6 @@ import java.util.UUID;
 public class BookService {
     @Inject
     BookMapper bookMapper;
-
     @Inject
     BookRepository bookRepository;
 
@@ -26,43 +23,42 @@ public class BookService {
         Book entity = bookMapper.toEntity(bookInputDto);
         bookRepository.persist(entity);
         return bookMapper.toDto(entity);
-
-
     }
 
     @Transactional
-    public BookDto updateBook(BookInputDto bookInputDto, UUID bookId) {
+    public BookDto updatedBook(BookInputDto bookInputDto, UUID bookId) {
         Book book = findBookById(bookId);
-        bookMapper.updateEntety(book, bookInputDto);
-        Book updateBook = bookRepository.update(book);
-        return bookMapper.toDto(updateBook);
-
-
+        bookMapper.updatedEntity(book, bookInputDto);
+        Book updatedBook = bookRepository.update(book);
+        return bookMapper.toDto(updatedBook);
     }
 
     private Book findBookById(UUID bookId) {
         return bookRepository.findById(bookId);
     }
 
-
     public List<BookDto> getBooks() {
         List<Book> books = bookRepository.listAll();
         return bookMapper.toListDtos(books);
-
     }
 
     public BookDto getBook(UUID id) {
         Book bookById = findBookById(id);
         return bookMapper.toDto(bookById);
-
     }
 
     public List<BookDto> getBooksByTitle(List<BookInputDto> bookInputDtos) {
+        List<BookInputDto> bookWithoutTitle = bookInputDtos.stream()
+                .filter(bookInputDto -> bookInputDto.title() == null)
+                .toList();
+        if (!bookWithoutTitle.isEmpty()){
+           throw new RuntimeException("Title is empty");
+        }
+
         List<Book> booksMatch = new ArrayList<>();
         for (BookInputDto bookInputDto : bookInputDtos) {
             List<Book> byTitle = bookRepository.findByTitle(bookInputDto.title());
             booksMatch.addAll(byTitle);
-
         }
         return bookMapper.toListDtos(booksMatch);
     }

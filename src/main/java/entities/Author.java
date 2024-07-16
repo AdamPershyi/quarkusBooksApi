@@ -1,10 +1,11 @@
 package entities;
-
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
 import lombok.*;
-
+import org.hibernate.annotations.UuidGenerator;
 import java.util.UUID;
 
 @Getter
@@ -16,16 +17,14 @@ import java.util.UUID;
 @AllArgsConstructor
 public class Author {
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
+    @UuidGenerator
     @Column(name = "id", nullable = false)
     private UUID id;
 
-    @Size(max = 255)
     @NotNull
     @Column(name = "name", nullable = false)
     private String name;
 
     @Column(name = "bio", length = Integer.MAX_VALUE)
     private String bio;
-
 }

@@ -5,7 +5,7 @@ CREATE TABLE author
     bio  TEXT
 );
 
--- Створення таблиці "book" з використанням UUID
+
 CREATE TABLE book
 (
     id               UUID PRIMARY KEY DEFAULT gen_random_uuid(),

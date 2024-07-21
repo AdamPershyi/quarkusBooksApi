@@ -26,7 +26,7 @@ public class Book {
     @Column(name = "publication_date")
     private LocalDate publicationDate;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST,CascadeType.MERGE})
     @JoinColumn(name = "author_id")
     private Author author;
 
